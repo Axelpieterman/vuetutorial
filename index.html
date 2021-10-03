@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Tutorail</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px ;
+            text-align: center;
+            background: beige;
+            margin: 20px;
+            display: inline-block;
+        }
+       
+    </style>
+    <style>
+        body{
+            background: lightgray;
+            max-width: 960px;
+            margin: 20px;
+        }
+        p, h3, ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style-type: none;
+            background: white;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        li.fav{
+            background: beige;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Guns Blazing</h1>
+
+    <div id="app">
+        <div v-if="hide">
+         <p>{{gunName}} - {{gunBrand}}, stock: {{stock}}</p>         
+        </div>
+        
+        <button v-on:click="toggleShowGuns">
+        <span v-if="hide">Hide gun</span>
+        <span v-else>Show guns</span>   
+        </button>
+        
+        <button v-on:click="stock++">Increase stock</button>
+        <button v-on:click="stock--">Decrease stock</button>
+        <br>
+        <p>Array of guns</p>
+        <ul>
+            <li v-for="gun in guns" :class="{fav: gun.isFav}" @Click="changeFav(gun)">
+                
+                <img v-bind:src="gun.img" alt="gun.name">
+                <h3>Gun name: {{gun.name}}</h3>
+                <p>gun brand: {{gun.brand}}</p>
+                <a v-bind:href="gun.url">View video</a>           
+            </li>
+       
+        </ul>
+        
+        <br>
+        <!-- mouse events-->
+        <div class="box"@mouseover="handleEvent(5)"> mouseover</div>
+        <div class="box"@mouseleave="handleEvent">mouseleave</div>
+        <div class="box"@dblclick="handleEvent">double click</div>
+        <div class="box"@mousemove="handleMouseMove">position - {{x}} {{y}}</div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
